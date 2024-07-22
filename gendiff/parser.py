@@ -1,6 +1,6 @@
 import json
-
 import yaml
+
 
 def parse_file(path):
     with open(path) as file:
