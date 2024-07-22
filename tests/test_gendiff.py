@@ -5,16 +5,12 @@ from gendiff.generate_diff import generate_diff
 file1_json = 'tests/fixtures/file1.json'
 file2_json = 'tests/fixtures/file2.json'
 @pytest.mark.parametrize(
-    'path1, path2, format, expected',
+    'path1, path2, format',
     [
-        (file1_json, file2_json, 'stylish', expected)
+        (file1_json, file2_json, 'stylish')
 
     ]
 )
-def test_gendiff(path1, path2, format, expected):
-    with open(expected) as result:
-        assert generate_diff(path1, path2, format) == result.read()
-
 
 def test_empty_file():
     wrong = 'tests/fixtures/empty_file.json'

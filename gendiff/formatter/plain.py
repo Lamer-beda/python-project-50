@@ -1,4 +1,4 @@
-from gendiff.format.make_str import make_str
+from gendiff.formatter.make_str import make_str
 
 
 def stringify(value):

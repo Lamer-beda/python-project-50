@@ -1,4 +1,4 @@
-from gendiff.format import stylish, plain, to_json
+from gendiff.formatter import stylish, plain, to_json
 
 
 def formatter(diffs, format_):
