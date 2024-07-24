@@ -7,4 +7,4 @@ def generate_diff(path1, path2, format_='stylish'):
     data1 = parse_file(path1)
     data2 = parse_file(path2)
     diffs = make_diff(data1, data2)
-    return formatter(diffs, format_)
+    return formatter(diffs, format_).strip()

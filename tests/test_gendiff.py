@@ -16,9 +16,9 @@ expected_plain = 'tests/fixtures/expected_plain.txt'
 expected_json = 'tests/fixtures/expected.json'
 
 @pytest.mark.parametrize(
-    'path1, path2, format',
+    'path1, path2, format, expected',
     [
-        (file1_json, file2_json, 'stylish'),
+        (file1_json, file2_json, 'stylish', expected),
         (file1_yaml, file2_yaml, 'stylish', expected),
         (file1_nested_json, file2_nested_json, 'stylish', expected_stylish),
         (file1_nested_yaml, file2_nested_yaml, 'stylish', expected_stylish),
@@ -32,7 +32,7 @@ expected_json = 'tests/fixtures/expected.json'
 
 def test_gendiff(path1, path2, format, expected):
     with open(expected) as result:
-        assert generate_diff(path1, path2, format) == result.read()
+        assert generate_diff(path1, path2, format).strip() == result.read().strip()
 
 def test_empty_file():
     wrong = 'tests/fixtures/empty_file.json'
