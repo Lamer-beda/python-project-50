@@ -15,6 +15,7 @@ expected_stylish = 'tests/fixtures/expected_stylish.txt'
 expected_plain = 'tests/fixtures/expected_plain.txt'
 expected_json = 'tests/fixtures/expected.json'
 
+
 @pytest.mark.parametrize(
     'path1, path2, format, expected',
     [
@@ -29,7 +30,6 @@ expected_json = 'tests/fixtures/expected.json'
 
     ]
 )
-
 def test_gendiff(path1, path2, format, expected):
     with open(expected) as result:
         expected_result = result.read().strip()
@@ -45,17 +45,20 @@ def test_gendiff(path1, path2, format, expected):
 
         assert actual_result == expected_result
 
+
 def test_empty_file():
     wrong = 'tests/fixtures/empty_file.json'
     path = 'tests/fixtures/file1.json'
     with pytest.raises(ValueError):
         generate_diff(wrong, path)
 
+
 def test_not_supproted_extension():
     wrong = 'tests/fixtures/file1.txt'
     path = 'tests/fixtures/file1.json'
     with pytest.raises(NameError):
         generate_diff(wrong, path)
+
 
 def test_not_supproted_format():
     path1 = 'tests/fixtures/file1.json'

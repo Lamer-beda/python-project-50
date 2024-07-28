@@ -1,5 +1,4 @@
 from gendiff.formatter.make_str import make_str
-import json
 
 REPLACER = ' '
 SPACES_COUNT = 4
@@ -15,7 +14,7 @@ def stringify(value, depth):
         if formatted_value == "":
             lines.append(f'{REPLACER * (depth + SPACES_COUNT)}{key}: ')
         else:
-            lines.append(f'{REPLACER * (depth + SPACES_COUNT)}{key}: {formatted_value}')
+            lines.append(f'{REPLACER * (depth + SPACES_COUNT)}{key}:{formatted_value}')
     lines.append(f'{REPLACER * depth}}}')
     return '\n'.join(lines)
 
@@ -43,6 +42,6 @@ def format_stylish(diffs):
             elif action_type == 'children':
                 result.append(f'{REPLACER * offset}{key}: {iter_(value, offset)}')
 
-        result.append(f'{REPLACER * depth }}}')
+        result.append(f'{REPLACER * depth}}}')
         return '\n'.join(result)
     return iter_(diffs, 0)
