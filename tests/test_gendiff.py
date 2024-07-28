@@ -32,7 +32,18 @@ expected_json = 'tests/fixtures/expected.json'
 
 def test_gendiff(path1, path2, format, expected):
     with open(expected) as result:
-        assert generate_diff(path1, path2, format).strip() == result.read().strip()
+        expected_result = result.read().strip()
+        actual_result = generate_diff(path1, path2, format).strip()
+
+        if actual_result != expected_result:
+            print("=== Expected ===")
+            print(expected_result)
+            print("================")
+            print("=== Actual ===")
+            print(actual_result)
+            print("================")
+
+        assert actual_result == expected_result
 
 def test_empty_file():
     wrong = 'tests/fixtures/empty_file.json'

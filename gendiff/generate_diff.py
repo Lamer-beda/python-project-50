@@ -3,8 +3,8 @@ from gendiff.build_diff import make_diff
 from gendiff.formatter.format_router import formatter
 
 
-def generate_diff(path1, path2, format_='stylish'):
+def generate_diff(path1, path2, output_format='stylish'):
     data1 = parse_file(path1)
     data2 = parse_file(path2)
     diffs = make_diff(data1, data2)
-    return formatter(diffs, format_).strip()
+    return formatter(diffs, output_format).strip()
