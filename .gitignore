@@ -1,3 +1,12 @@
 .Makefile.swp
 demo.cast
-
+*.egg-info
+__pycache__
+./*/*/__pycache__
+dist/
+*.pyc
+.venv/
+.coverage
+coverage.xml
+.pytest_cache/
+.idea/
