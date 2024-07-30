@@ -1,20 +1,27 @@
+import os
 import json
 import yaml
 
 
-def parse_file(path):
-    with open(path) as file:
-        content = file.read()
-    if not content:
-        raise ValueError('Empty file')
-    last_dot_index = path.rfind('.')
-    file_extension = path[last_dot_index + 1:]
-    if file_extension == 'yml':
-        file_extension = 'yaml'
-    match file_extension:
-        case 'json':
-            return json.loads(content)
-        case 'yaml':
-            return yaml.safe_load(content)
-        case _:
-            raise NameError(f'file extension {file_extension} not supported')
+def get_file_extension(file_path):
+    file_name, file_extension = os.path.splitext(file_path)
+    return file_extension[1:]
+
+
+def get_content_of_file(file_path):
+    with open(file_path) as file:
+        return file.read()
+
+
+def parse_data(content, format):
+    if format == 'json':
+        return json.loads(content)
+    if format == 'yml' or format == 'yaml':
+        return yaml.safe_load(content)
+
+
+def parse_data_from_file(file_path):
+    format = get_file_extension(file_path)
+    content = get_content_of_file(file_path)
+
+    return parse_data(content, format)

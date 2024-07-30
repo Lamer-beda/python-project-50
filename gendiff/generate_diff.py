@@ -1,10 +1,10 @@
-from gendiff.parser import parse_file
-from gendiff.build_diff import make_diff
-from gendiff.formatter.format_router import formatter
+from gendiff.parser import parse_data_from_file
+from gendiff.generate import generate
+from gendiff.formatters.choice_formatter import format_diff
 
 
-def generate_diff(path1, path2, format_='stylish'):
-    data1 = parse_file(path1)
-    data2 = parse_file(path2)
-    diffs = make_diff(data1, data2)
-    return formatter(diffs, format_)
+def generate_diff(path_to_file1, path_to_file2, formatter='stylish'):
+    content_file_1 = parse_data_from_file(path_to_file1)
+    content_file_2 = parse_data_from_file(path_to_file2)
+    diff = generate(content_file_1, content_file_2)
+    return format_diff(diff, formatter)

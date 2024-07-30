@@ -1,9 +1,8 @@
 import argparse
 
 
-def parse_args():
+def get_parser_args():
     parser = argparse.ArgumentParser(
-        prog='gendiff',
         description='Compares two configuration files and shows a difference.'
     )
     parser.add_argument('first_file')
@@ -11,7 +10,7 @@ def parse_args():
     parser.add_argument(
         '-f', '--format',
         help='set format of output',
-        default='stylish'
+        choices=['stylish', 'plain', 'json'],
+        default='stylish', type=str
     )
-    args = parser.parse_args()
-    return [args.first_file, args.second_file, args.format]
+    return parser.parse_args()

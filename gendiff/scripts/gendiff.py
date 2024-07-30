@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
-from gendiff.cli import parse_args
+from gendiff.cli import get_parser_args
 from gendiff.generate_diff import generate_diff
 
 
 def main():
-    path1, path2, format_ = parse_args()
-    print(generate_diff(path1, path2, format_))
+    args = get_parser_args()
+    diff = generate_diff(args.first_file, args.second_file, args.format)
+    print(diff)
 
 
 if __name__ == '__main__':
