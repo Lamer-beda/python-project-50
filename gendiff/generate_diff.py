@@ -7,7 +7,5 @@ def generate_diff(path_to_file1, path_to_file2, formatter='stylish'):
     content_file_1 = parse_data_from_file(path_to_file1)
     content_file_2 = parse_data_from_file(path_to_file2)
     diff = generate(content_file_1, content_file_2)
-    if formatter == 'stylish' or 'txt' or 'yaml' or 'json':
-        return format_diff(diff, formatter)
-    else:
-        raise NameError("Unsupported format")
+    return format_diff(diff, formatter)
+

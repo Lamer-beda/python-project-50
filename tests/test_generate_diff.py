@@ -44,8 +44,8 @@ import pytest
     ]
 )
 def test_gendiff(path_to_file1, path_to_file2, formatter, expected_result):
-    diff = generate_diff(path_to_file1, path_to_file2, formatter)
-    with open(expected_result, 'r', encoding='utf8') as file:
+    diff = generate_diff(path_to_file1, path_to_file2, formatter).strip('\n')
+    with open(expected_result) as file:
         result = file.read().strip('\n')
         if result != diff:
             print("=== Expected ===")
