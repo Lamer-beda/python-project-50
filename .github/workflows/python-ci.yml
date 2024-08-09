@@ -22,8 +22,6 @@ jobs:
       - name: Run linter and pytest
         run: |
           make check
-          pip install pytest-cov
-          pytest --cov=./ --cov-report=xml
       - name: Test & publish code coverage
         uses: paambaati/codeclimate-action@v5.0.0
         if: github.ref_name == 'main'
