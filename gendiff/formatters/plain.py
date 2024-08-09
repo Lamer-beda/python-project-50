@@ -12,23 +12,23 @@ def to_str(value):
 
 
 def make_plain_result_item(item, path=''):
-    current_key = item.get('name')
+    current_key = item.get('key')
     current_path = f"{path}.{current_key}" if path else current_key
-    action = item.get('action')
-    new_value = to_str(item.get('new_value'))
-    old_value = to_str(item.get('old_value'))
+    action = item.get('action_type')
+    new_value = to_str(item.get('value'))
+    old_value = to_str(item.get('new_value'))
 
     if action == 'added':
         return f"Property '{current_path}' was added with value: {new_value}"
-    if action == 'deleted':
+    if action == 'removed':
         return f"Property '{current_path}' was removed"
-    if action == 'modified':
+    if action == 'changed':
         return (
             f"Property '{current_path}' was updated. "
-            f"From {old_value} to {new_value}"
+            f"From {new_value} to {old_value}"
         )
-    if action == 'nested':
-        children = item.get('children')
+    if action == 'children':
+        children = item.get('value')
         return make_plain_result(children, current_path)
     return None
 

@@ -1,42 +1,42 @@
 def to_add(key, value):
     return {
-        'action': 'added',
-        'name': key,
-        'new_value': value
+        'key': key,
+        'action_type': 'added',
+        'value': value
     }
 
 
 def to_delete(key, value):
     return {
-        'action': 'deleted',
-        'name': key,
-        'old_value': value
+        'key': key,
+        'action_type': 'removed',
+        'value': value
     }
 
 
 def to_unchanged(key, value):
     return {
-        'action': 'unchanged',
-        'name': key,
+        'key': key,
+        'action_type': 'not_changed',
         'value': value
     }
 
 
 def to_modified(key, value1, value2):
     return {
-        'action': 'modified',
-        'name': key,
-        'new_value': value2,
-        'old_value': value1
+        'key': key,
+        'action_type': 'changed',
+        'value': value1,
+        'new_value': value2
     }
 
 
 def to_nested(key, value1, value2):
 
     return {
-        'action': 'nested',
-        'name': key,
-        'children': generate(value1, value2)
+        'key': key,
+        'action_type': 'children',
+        'value': generate(value1, value2)
     }
 
 
@@ -58,5 +58,5 @@ def generate(data1, data2):
             diff.append(to_modified(key, value1, value2))
         else:
             diff.append(to_unchanged(key, value1))
-    sorted_diff = sorted(diff, key=lambda x: x['name'])
+    sorted_diff = sorted(diff, key=lambda x: x['key'])
     return sorted_diff

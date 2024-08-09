@@ -29,24 +29,24 @@ def make_stylish_result(diff, depth=1):
     indent = SEPARATOR * (depth * DEFAULT_INDENT - 2)
     lines = []
     for item in diff:
-        key_name = item['name']
-        old_value = to_str(item.get("old_value"), depth)
+        key_name = item['key']
+        old_value = to_str(item.get("value"), depth)
         new_value = to_str(item.get("new_value"), depth)
-        action = item["action"]
+        action = item["action_type"]
         match action:
-            case "unchanged":
+            case "not_changed":
                 current_value = to_str(item.get("value"), depth)
                 lines.append(f"{indent}{NONE}{key_name}: {current_value}")
-            case "modified":
+            case "changed":
                 lines.append(f"{indent}{DELETE}{key_name}: {old_value}")
                 lines.append(f"{indent}{ADD}{key_name}: {new_value}")
-            case "deleted":
+            case "removed":
                 lines.append(f"{indent}{DELETE}{key_name}: {old_value}")
             case "added":
-                lines.append(f"{indent}{ADD}{key_name}: {new_value}")
-            case "nested":
+                lines.append(f"{indent}{ADD}{key_name}: {old_value}")
+            case "children":
                 children = make_stylish_result(
-                    item.get("children"), depth + 1
+                    item.get("value"), depth + 1
                 )
                 lines.append(f"{indent}{NONE}{key_name}: {children}")
 
